@@ -1,0 +1,46 @@
+package com.ucompensar.TechNowAPI.business.entity;
+
+import java.io.Serializable;
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name = "users")
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class UserEntity implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	
+	@Column(name="name_user", nullable = false)
+	private String nombreUsuario;
+	
+	@Column(name="pass_user", nullable = false)
+	private String contraseniaUsuario;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+	@Column(name="fe_crea", nullable = false)
+	private Date fechaCreacion;
+	
+	@Column(name="id_acti", columnDefinition = "varchar(1)", nullable = false)
+	private String idActivo;
+
+}
