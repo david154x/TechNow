@@ -33,7 +33,7 @@ public class UserRolEntity implements Serializable {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_rol")
-    private RolEntity rol;
+    private RolesEntity rol;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user")

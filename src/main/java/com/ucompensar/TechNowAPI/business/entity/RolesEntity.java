@@ -14,12 +14,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "roles_user")
+@Table(name = "roles")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RolEntity implements Serializable {
+public class RolesEntity implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
