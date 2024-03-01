@@ -13,17 +13,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ucompensar.TechNowAPI.business.dto.UserCreateDTO;
-import com.ucompensar.TechNowAPI.business.dto.UserUpdDTO;
-import com.ucompensar.TechNowAPI.business.entity.UserEntity;
-import com.ucompensar.TechNowAPI.business.service.UserService;
+import com.ucompensar.TechNowAPI.business.dto.RolUpdtDTO;
+import com.ucompensar.TechNowAPI.business.entity.RolesEntity;
+import com.ucompensar.TechNowAPI.business.service.RolService;
 
 @RestController
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("/rol")
+public class RolController {
 	
 	@Autowired
-	private UserService userService;
+	private RolService rolService;
 	
 	@GetMapping("/status")
 	public Boolean status() {
@@ -31,12 +30,12 @@ public class UserController {
 	}
 	
 	@GetMapping("")
-	public List<UserEntity> consultarTodosLosUsuarios() {
+	public List<RolesEntity> consultarTodosLosRoles() {
 		try {
-			List<UserEntity> lstUsers =  userService.consultarTodosLosUsuarios();
+			List<RolesEntity> lstRoles =  rolService.consultarTodosLosRoles();
 			
-			if (lstUsers != null && !lstUsers.isEmpty())
-				return lstUsers;
+			if(lstRoles != null && !lstRoles.isEmpty())
+				return lstRoles;
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -45,12 +44,12 @@ public class UserController {
 	}
 	
 	@GetMapping("/{id}")
-	public UserEntity consultarUsuarioXId(@PathVariable Integer id) {
+	public RolesEntity consultarRolXId(@PathVariable Integer id) {
 		try {
-			UserEntity userEntity =  userService.consultarUsuarioXId(id);
+			RolesEntity rolEntity =  rolService.consultarRolXId(id);
 			
-			if (userEntity != null && !Objects.isNull(userEntity))
-				return userEntity;
+			if (rolEntity != null && !Objects.isNull(rolEntity))
+				return rolEntity;
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -58,14 +57,14 @@ public class UserController {
 		return null;
 	}
 	
-	@PostMapping("")
-	public UserEntity crearUsuario(@RequestBody UserCreateDTO userCreateDTO) {
+	@PostMapping("/{nombreRol}")
+	public RolesEntity crearRol(@PathVariable String nombreRol) {
 		try {
 			
-			UserEntity usuarioCreado = userService.crearUsuario(userCreateDTO);
+			RolesEntity rolesEntity = rolService.crearRol(nombreRol);
 
-			if (usuarioCreado != null)
-				return usuarioCreado;
+			if(rolesEntity != null)
+				return rolesEntity;
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -74,15 +73,25 @@ public class UserController {
 	}
 	
 	@PutMapping("")
-    public UserEntity updateUser(@RequestBody UserUpdDTO UserUpdateDTO) {
-        return userService.modificarUsuario(UserUpdateDTO);
+    public RolesEntity updateRol(@RequestBody RolUpdtDTO rolUpdtDTO) {
+		try {
+			
+			RolesEntity rolModificado = rolService.modificarRol(rolUpdtDTO);
+			
+			if(rolModificado != null)
+				return rolModificado;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
     }
 	
 	@DeleteMapping("/{id}")
-    public Boolean deleteUser(@PathVariable Integer id) {
+    public Boolean deleteRol(@PathVariable Integer id) {
 		try {
 			
-			if(userService.eliminarUsuario(id))
+			if(rolService.eliminarRol(id))
 				return Boolean.TRUE;
 			
 		} catch (Exception e) {

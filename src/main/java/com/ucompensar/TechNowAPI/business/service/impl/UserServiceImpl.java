@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ucompensar.TechNowAPI.business.dto.UserCreateDTO;
-import com.ucompensar.TechNowAPI.business.dto.UserUpdateDTO;
+import com.ucompensar.TechNowAPI.business.dto.UserUpdDTO;
+import com.ucompensar.TechNowAPI.business.entity.PersonaEntity;
 import com.ucompensar.TechNowAPI.business.entity.UserEntity;
+import com.ucompensar.TechNowAPI.business.repository.PersonaRepository;
 import com.ucompensar.TechNowAPI.business.repository.UserRepository;
 import com.ucompensar.TechNowAPI.business.service.UserService;
 
@@ -19,6 +21,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private PersonaRepository personaRepository; 
 
 	@Override
 	public List<UserEntity> consultarTodosLosUsuarios() throws Exception {
@@ -55,12 +60,26 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserEntity crearUsuario(UserCreateDTO userCreateDTO) {
 		try {
+			PersonaEntity personaCreada = personaRepository.save(PersonaEntity.builder()
+                                                                              .numeroDocumento(userCreateDTO.getNumeroDocumento())
+                                                                              .primerNombre(userCreateDTO.getPrimerNombre())
+                                                                              .segundoNombre(userCreateDTO.getSegundoNombre())
+                                                                              .primerApellido(userCreateDTO.getPrimerApellido())
+                                                                              .segundoApellido(userCreateDTO.getSegundoApellido())
+                                                                              .genero(userCreateDTO.getGenero())
+                                                                              .fechaNacimiento(userCreateDTO.getFechaNacimiento())
+                                                                              .telefono(userCreateDTO.getTelefono())
+                                                                              .fechaCreacion(new Date())
+                                                                              .build());
+			
+			
 			UserEntity usuarioCreado = userRepository.save(UserEntity.builder()
-					  												 .nombreUsuario(userCreateDTO.getNombreUsuario())
-					  												 .contraseniaUsuario(userCreateDTO.getClaveUsuario())
-					  												 .fechaCreacion(new Date())
-					  												 .idActivo("A")
-					  												 .build());
+					                                                 .nombreUsuario(userCreateDTO.getNuevoUsuario())
+					                                                 .contraseniaUsuario(userCreateDTO.getNuevaContrasena())
+					                                                 .personaEntity(personaCreada)
+					                                                 .idActivo("A")
+					                                                 .fechaCreacion(new Date())
+					                                                 .build());
 
 			if (usuarioCreado != null && !Objects.isNull(usuarioCreado))
 				return usuarioCreado;
@@ -72,7 +91,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserEntity modificarUsuario(UserUpdateDTO UserUpdateDTO) {
+	public UserEntity modificarUsuario(UserUpdDTO UserUpdateDTO) {
 		try {
 			UserEntity usuarioEncontrado = consultarUsuarioXId(UserUpdateDTO.getId());
 			

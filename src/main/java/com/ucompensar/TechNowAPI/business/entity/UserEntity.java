@@ -35,7 +35,7 @@ public class UserEntity implements Serializable {
 	private Integer id;
 	
 	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "nu_docu", nullable = false)
+    @JoinColumn(name = "nu_docu", nullable = true, referencedColumnName = "nu_docu")
     private PersonaEntity personaEntity;
 	
 	@Column(name="name_user", nullable = false)
@@ -44,11 +44,11 @@ public class UserEntity implements Serializable {
 	@Column(name="pass_user", nullable = false)
 	private String contraseniaUsuario;
 	
+	@Column(name="id_acti", columnDefinition = "varchar(1)", nullable = false)
+	private String idActivo;
+	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name="fe_crea", nullable = false)
 	private Date fechaCreacion;
-	
-	@Column(name="id_acti", columnDefinition = "varchar(1)", nullable = false)
-	private String idActivo;
 
 }

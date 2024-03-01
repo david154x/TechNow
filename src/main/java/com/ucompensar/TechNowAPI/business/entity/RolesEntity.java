@@ -1,6 +1,9 @@
 package com.ucompensar.TechNowAPI.business.entity;
 
 import java.io.Serializable;
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,5 +33,12 @@ public class RolesEntity implements Serializable {
 	
 	@Column(name="de_rol", nullable = false, length = 30)
 	private String nombreRol;
+	
+	@Column(name="id_acti", columnDefinition = "varchar(1)", nullable = false)
+	private String idActivo;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+	@Column(name="fe_crea", nullable = false)
+	private Date fechaCreacion;
 
 }

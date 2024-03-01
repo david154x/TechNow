@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Hidden
-public class UserUpdateDTO {
+public class UserUpdDTO {
 	
 	private Integer id;
 	private String nombreUsuario;
