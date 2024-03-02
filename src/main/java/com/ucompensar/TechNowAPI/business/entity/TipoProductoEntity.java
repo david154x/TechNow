@@ -42,4 +42,5 @@ public class TipoProductoEntity implements Serializable {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name="fe_crea", nullable = false)
 	private Date fechaCreacion;
+	
 }
