@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,6 +22,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "users")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Data
 @Builder
 @AllArgsConstructor
@@ -32,10 +34,10 @@ public class UserEntity implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_user", nullable = false)
-	private Integer id;
+	private Integer idUser;
 	
 	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "nu_docu", nullable = false)
+    @JoinColumn(name = "nu_docu", nullable = true, referencedColumnName = "nu_docu")
     private PersonaEntity personaEntity;
 	
 	@Column(name="name_user", nullable = false)
@@ -44,11 +46,11 @@ public class UserEntity implements Serializable {
 	@Column(name="pass_user", nullable = false)
 	private String contraseniaUsuario;
 	
+	@Column(name="id_acti", columnDefinition = "varchar(1)", nullable = false)
+	private String idActivo;
+	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name="fe_crea", nullable = false)
 	private Date fechaCreacion;
-	
-	@Column(name="id_acti", columnDefinition = "varchar(1)", nullable = false)
-	private String idActivo;
 
 }

@@ -3,6 +3,8 @@ package com.ucompensar.TechNowAPI.business.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -30,11 +32,11 @@ public class ReseniaEntity implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_rese")
-	private Integer idProducto;
+	private Integer idResenia;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_tipo_prod", nullable = false)
-    private TipoProductoEntity tipoProductoEntity;
+    @JoinColumn(name = "id_prod", nullable = false)
+    private ProductoEntity productoEntity;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user", nullable = false)
@@ -46,7 +48,8 @@ public class ReseniaEntity implements Serializable {
 	@Column(name = "nu_punt_rese", nullable = false)
 	private Integer puntuacionResenia;
 	
-	@Column(name = "fe_crea", nullable = false)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+	@Column(name="fe_crea", nullable = false)
 	private Date fechaCreacion;
 
 }

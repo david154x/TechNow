@@ -1,6 +1,7 @@
 package com.ucompensar.TechNowAPI.business.dto;
 
-import io.swagger.v3.oas.annotations.Hidden;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,10 +11,30 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Hidden
+//@Hidden
 public class UserCreateDTO {
 	
-	private String nombreUsuario;
-	private String claveUsuario;
+    private String nuevoUsuario;
+	
+    private String nuevaContrasena;
+    
+	private String numeroDocumento;
+	
+    private String primerNombre;
+	
+	private String segundoNombre;
+	
+	private String primerApellido;
+	
+	private String segundoApellido;
+	
+	private String direccion;
+	
+	private String telefono;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private String fechaNacimiento;
+	
+	private String genero;
 
 }

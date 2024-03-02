@@ -1,6 +1,10 @@
 package com.ucompensar.TechNowAPI.business.entity;
 
 import java.io.Serializable;
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,6 +17,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="persona")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Data
 @Builder
 @AllArgsConstructor
@@ -43,10 +48,11 @@ public class PersonaEntity implements Serializable {
 	@Column(name="fe_naci", nullable = false)
 	private String fechaNacimiento;
 	
-	@Column(name="de_dire", nullable = false)
-	private String email;
-	
 	@Column(name="de_tele", nullable = false)
 	private String telefono;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+	@Column(name="fe_crea", nullable = false)
+	private Date fechaCreacion;
 
 }
