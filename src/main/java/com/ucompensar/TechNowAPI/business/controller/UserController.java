@@ -75,7 +75,16 @@ public class UserController {
 	
 	@PutMapping("")
     public UserEntity updateUser(@RequestBody UserUpdDTO UserUpdateDTO) {
-        return userService.modificarUsuario(UserUpdateDTO);
+		try {
+			UserEntity UserEntityModificado = userService.modificarUsuario(UserUpdateDTO);
+			
+			if (UserEntityModificado != null && !Objects.isNull(UserEntityModificado))
+				return UserEntityModificado;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        return null;
     }
 	
 	@DeleteMapping("/{id}")
