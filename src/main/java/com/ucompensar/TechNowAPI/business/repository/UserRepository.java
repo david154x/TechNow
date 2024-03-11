@@ -5,5 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.ucompensar.TechNowAPI.business.entity.UserEntity;
 
 public interface UserRepository extends JpaRepository<UserEntity, Integer> {
+    UserEntity findByNombreUsuario(String nombreUsuario);
 
 }

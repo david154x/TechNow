@@ -125,5 +125,20 @@ public class UserServiceImpl implements UserService {
 		}
 		return Boolean.FALSE;
 	}
+	
+	@Override
+	public UserEntity verificarPassword(String nombreUsuario, String contrasenia) {
+	    try {
+	        UserEntity usuario = userRepository.findByNombreUsuario(nombreUsuario);
+	        if (usuario != null && usuario.getContraseniaUsuario().equals(contrasenia)) {
+	            return usuario;
+	        }
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return null;
+	}
+
+
 
 }

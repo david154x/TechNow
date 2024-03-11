@@ -7,15 +7,16 @@ import com.ucompensar.TechNowAPI.business.dto.UserUpdDTO;
 import com.ucompensar.TechNowAPI.business.entity.UserEntity;
 
 public interface UserService {
-	
-	List<UserEntity> consultarTodosLosUsuarios() throws Exception;
-	
-	UserEntity consultarUsuarioXId(Integer id);
-	
-	UserEntity crearUsuario(UserCreateDTO userCreateDTO);
-	
-	UserEntity modificarUsuario(UserUpdDTO UserUpdateDTO);
-	
-	Boolean eliminarUsuario(Integer id);
-
+    
+    List<UserEntity> consultarTodosLosUsuarios() throws Exception;
+    
+    UserEntity consultarUsuarioXId(Integer id);
+    
+    UserEntity crearUsuario(UserCreateDTO userCreateDTO);
+    
+    UserEntity modificarUsuario(UserUpdDTO UserUpdateDTO);
+    
+    Boolean eliminarUsuario(Integer id);
+    
+    UserEntity verificarPassword(String nombreUsuario, String contrasenia);
 }

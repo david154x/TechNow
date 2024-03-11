@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ucompensar.TechNowAPI.business.dto.UserCreateDTO;
 import com.ucompensar.TechNowAPI.business.dto.UserUpdDTO;
+import com.ucompensar.TechNowAPI.business.dto.VerificarPasswordDTO;
 import com.ucompensar.TechNowAPI.business.entity.UserEntity;
 import com.ucompensar.TechNowAPI.business.service.UserService;
 
@@ -100,5 +101,16 @@ public class UserController {
         
         return Boolean.FALSE;
     }
+	 @PostMapping("/verificar-password")
+	    public UserEntity verificarPassword(@RequestBody VerificarPasswordDTO userCreateDTO) {
+	        try {
+	            UserEntity usuarioVerificado = userService.verificarPassword(userCreateDTO.getNuevoUsuario(), userCreateDTO.getNuevaContrasena());
 
+	            if (usuarioVerificado != null)
+	                return usuarioVerificado;
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        return null;
+	    }
 }

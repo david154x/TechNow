@@ -55,7 +55,7 @@ public class ProductoEntity implements Serializable {
 	private BigDecimal valorProducto;
 	
 	@Column(name = "de_ruta", nullable = false)
-	private String ubicacionFoto;
+	private byte[] ubicacionFoto;
 
 	@Column(name = "id_acti", columnDefinition = "varchar(1)", nullable = false)
 	private String idActivo;

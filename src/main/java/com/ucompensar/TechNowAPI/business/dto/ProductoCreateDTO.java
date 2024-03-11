@@ -23,6 +23,6 @@ public class ProductoCreateDTO {
 
 	private BigDecimal valorProducto;
 
-	private String ubicacionFoto;
+	private byte[] ubicacionFoto;
 
 }
