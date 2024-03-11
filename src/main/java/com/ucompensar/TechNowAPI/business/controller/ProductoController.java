@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.ucompensar.TechNowAPI.business.dto.ProductoCreateDTO;
 import com.ucompensar.TechNowAPI.business.dto.ProductoUpdDTO;
@@ -20,6 +21,8 @@ import com.ucompensar.TechNowAPI.business.service.ProductoService;
 
 @RestController
 @RequestMapping("/producto")
+@CrossOrigin(origins = "http://localhost:4200")
+
 public class ProductoController {
 	
 	@Autowired
